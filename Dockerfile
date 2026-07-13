@@ -1,9 +1,14 @@
-# Replace the image below with your project's approved SHA256-pinned base image.
-FROM <approved-base-image>@sha256:<digest>
+# Replaced with the Harbor-approved base image and its SHA256 digest.
+FROM <approved-base-image>@sha256:<approved-digest>
 
 WORKDIR /app
 
-# Install pinned verifier dependencies during image build.
-RUN pip install pytest pytest-json-report
+RUN pip install --no-cache-dir \
+    pytest==8.4.1 \
+    pytest-json-ctrf==0.3.5
 
-# Do NOT copy any solution or solution_hint files into this image.
+COPY access.log /app/access.log
+
+# Do NOT copy solution_hint.py or any other reference solution.
+
+CMD ["/bin/bash"]
